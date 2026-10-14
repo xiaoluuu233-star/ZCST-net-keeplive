@@ -1,0 +1,28 @@
+# Local configuration
+config.toml
+config.*.toml
+!config.example.toml
+.env
+.env.*
+
+# Build output and logs
+*.log
+*.log.*
+*.exe
+*.zip
+*.test
+*.out
+dist/
+coverage/
+
+# Local caches and backups
+backup/
+backups/
+*.bak
+*.tmp
+.cache/
+__pycache__/
+.venv/
+.superpowers/
+.DS_Store
+Thumbs.db
