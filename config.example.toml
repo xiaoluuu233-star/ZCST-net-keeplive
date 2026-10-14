@@ -1,0 +1,47 @@
+# Go 版也兼容原 Python 的扁平 config.toml；请原样保留实际账号，不自动加后缀。
+[account]
+userid = "your-account"
+password = "your-password"
+
+[portal]
+base_url = "http://172.32.253.17"
+wlanacname = "VBRAS-ZHKJ4"
+wlanac_ip = "172.32.253.8"
+# 动态重定向中的参数优先覆盖这些回退值。
+wlanuserip = ""
+mac = ""
+vlan = "0"
+bind_operator_type = "2"
+
+[network]
+# 留空沿用系统路由；使用 TUN 时仍应导入 Clash DIRECT 规则。
+interface = ""
+source_ip = ""
+allow_proxy = false
+
+[probe]
+connectivity_url = "http://www.msftconnecttest.com/connecttest.txt"
+connectivity_code = 200
+connectivity_body = "Microsoft Connect Test"
+interval = "1s"
+# 登录请求超时（兼容旧版字段）；主动探测超时单独设置。
+timeout = "8s"
+probe_timeout = "2s"
+confirm_timeout = "8s"
+fail_threshold = 2
+# 可增加备用站点，每个站点都必须填写独立的预期状态/正文。
+# [[probe.backup_targets]]
+# url = "http://your-own-probe/"
+# status_code = 200
+# body = "network-ok"
+
+[retry]
+max_retries = 5
+min_interval = "5s"
+max_interval = "120s"
+cooldown = "60s"
+
+[log]
+file = "campus-network.log"
+max_size_mb = 5
+max_backups = 3

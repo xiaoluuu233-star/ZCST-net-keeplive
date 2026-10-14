@@ -1,0 +1,7 @@
+payload:
+  # 校园网 Portal 认证服务器
+  - IP-CIDR,172.32.253.17/32,no-resolve
+  - IP-CIDR,172.32.253.0/24,no-resolve
+  # Windows 联网状态检测，避免被代理改写为代理出口结果
+  - DOMAIN,www.msftconnecttest.com
+  - DOMAIN-SUFFIX,msftconnecttest.com
