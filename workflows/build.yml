@@ -1,0 +1,35 @@
+name: Test and build Windows Go client
+on:
+  push:
+  workflow_dispatch:
+jobs:
+  test:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.27.x'
+      - run: go vet ./...
+      - run: go test -count=1 -timeout 90s ./...
+      - if: runner.os == 'Linux'
+        run: go test -race -timeout 90s ./...
+  build:
+    needs: test
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.27.x'
+      - shell: pwsh
+        run: ./scripts/build.ps1
+      - uses: actions/upload-artifact@v4
+        with:
+          name: campus-network-go-windows-amd64
+          path: |
+            dist/*.zip
+            dist/SHA256SUMS.txt
