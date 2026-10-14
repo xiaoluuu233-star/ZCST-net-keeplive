@@ -66,10 +66,3 @@ go vet ./...
 powershell -ExecutionPolicy Bypass -File ./scripts/build.ps1
 ```
 
-输出在 dist；发行包包含单个 EXE、README、配置模板、Clash 规则、许可与 SHA256 校验值，排除本地配置。CI 包含 Linux 竞态检查、Windows 托盘本地烟雾测试和 Windows amd64 构建；尚未上传仓库，因此本地检查通过不代表 GitHub Actions 已运行。
-
-测试使用 httptest、本地伪检测器和虚拟凭据，不访问真实校园网。**离线测试、编译和托盘成功不等于实际登录重连成功。** 真实确认应在校园网下检查：正常联网时无多余认证，断线时动态参数正确、认证后外网恢复；开启 Clash 后 DIRECT 有效；凭据错误不会不停请求。
-
-更新前 Go 1.0.0 的 EXE、源码与私密配置保存在相邻 `04_Go旧版备份/1.0.0-20261014`；该备份包含真实配置，仅供本机回退，不要分享。退出新版后恢复其中的 EXE 与配置即可回退。
-
-主动联网版完整验证记录保存在源码目录的 docs/verification-active-2026-10-14.md，包含本地模拟时延与真实校园网尚未验证的边界。设计与实施记录见 docs/superpowers；第三方来源与许可见 THIRD_PARTY_NOTICES.md。
