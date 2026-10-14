@@ -1,0 +1,21 @@
+name: Build Windows Go client
+on:
+  push:
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.27.x'
+      - run: go vet ./...
+      - shell: pwsh
+        run: ./scripts/build.ps1
+      - uses: actions/upload-artifact@v4
+        with:
+          name: campus-network-go-windows-amd64
+          path: |
+            dist/*.zip
+            dist/SHA256SUMS.txt
